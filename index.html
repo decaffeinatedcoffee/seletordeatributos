@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Montserrat&display=swap" rel="stylesheet">
+    <title>Seletor de atributos</title>
+</head>
+<style>
+    body{
+        font-family: 'Montserrat', sans-serif;
+    }
+   .title{
+   text-align: center;
+   font-size: 20px;
+   margin-top: 12vh;
+   }
+.switch {
+  clear: both;
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 34px;
+  margin-top: 40px;
+  float: left;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider {
+  background-color: purple;
+}
+input:focus + .slider {
+  box-shadow: 0 0 1px purple;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+.caption{
+    float: left;
+    margin-left: 15px;
+    margin-top: 45px;
+    font-size: 20px;
+}
+.switches{
+    position: absolute;
+    left: 20vw;
+    right: 20vw;
+}
+</style>
+<body>
+    <p class="title">Selecione atributos para sua vida</p>
+    <div class="switches">
+        <label class="switch">
+            <input type="checkbox" onclick="check(1)" id="c1">
+            <span class="slider round"></span>
+          </label>
+          <span class="caption">Trabalhar</span>
+          <label class="switch">
+            <input type="checkbox" onclick="check(2)" id="c2">
+            <span class="slider round"></span> 
+          </label>
+           <span class="caption">Estudar</span>
+          <label class="switch">
+            <input type="checkbox" onclick="check(3)" id="c3">
+            <span class="slider round"></span>  
+          </label>
+          <span class="caption">Ter tempo</span>
+    </div>
+</body>
+
+<script>
+
+function check(cn){
+let c1 = document.getElementById("c1");
+let c2 = document.getElementById("c2");
+let c3 = document.getElementById("c3");
+let currentcn = document.getElementById(`c${cn}`);
+if(currentcn.checked){
+    if(c1.checked && c2.checked && currentcn.id == `c3`){
+     document.getElementById(`c${uncheck(2,1)}`).checked = false;
+    }else if(c1.checked && c3.checked && currentcn.id == `c2`){
+        document.getElementById(`c${uncheck(3,1)}`).checked = false;
+    }else if(c2.checked && c3.checked && currentcn.id == `c1`){
+        document.getElementById(`c${uncheck(3,2)}`).checked = false;
+   }
+}
+function uncheck(max, min){
+    return Math.random() > 0.5 ? max:min
+}
+}
+</script>
+</html>
